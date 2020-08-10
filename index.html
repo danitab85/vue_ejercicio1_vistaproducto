@@ -25,6 +25,7 @@
         <div class="col">
           <h1>{{product}}</h1>
           <h2>{{description}}</h2>
+          <h2>{{stock}}</h2>
           <p v-if='stock >= 10'>En Stock</p>
           <p v-else-if='stock <= 10 && stock > 0'>Quedan muy pocas</p>
           <p v-else>Agotadas</p>
@@ -34,12 +35,12 @@
             </li>
           </ul>
           <div v-for='variant in variants' :key='variant.id'>
-            <p v-on:mouseover='updateImg(variant.img)'>{{variant.type}}</p>
+            <p v-on:mouseover='updateProduct(variant)'>{{variant.type}}</p>
           </div>
           <a :href="lnk">Ver detalle</a>
           <p>{{cart}}</p>
-          <button class="btn btn-sm btn-info" @click='addToCart' :disabled="!inStock">Agregar al carro</button>
-          <button class="btn btn-sm btn-warning" @click='removeFromCart'>Sacar del carro</button>
+          <button class="btn btn-sm btn-info" @click='addToCart()' :disabled="!inStock">Agregar al carro</button>
+          <button class="btn btn-sm btn-warning" @click='removeFromCart()'>Sacar del carro</button>
         </div>
       </div>
     </div>

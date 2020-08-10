@@ -3,28 +3,27 @@ var app = new Vue({
     data: {
         description: 'Lorem ipsum',
         product: 'Longaniza',
-        img: './assets/index.png',
+        selectedVariant: {},
         lnk: './longaniza.html',
-        stock: 12,
         details: ["500gr", "16gr de proteína", "Libre de sufrimiento"],
         variants: [
-            { id: 1, type: 'original', img: './assets/index.png' },
-            { id: 2, type: 'hot italian', img: './assets/hotitalian.png' }
+            { id: 1, type: 'original', img: './assets/index.png', stock: 10 },
+            { id: 2, type: 'hot italian', img: './assets/hotitalian.png', stock: 0, default: true }
         ],
         cart: 0
     },
     methods: {
-        updateImg(imagen) {
-            this.img = imagen;
+        updateProduct(variant) {
+            this.selectedVariant = variant;
         },
         addToCart() {
             this.cart += 1;
-            this.stock -= 1;
+            this.selectedVariant.stock -= 1;
         },
         removeFromCart() {
             if (this.cart > 0) {
                 this.cart -= 1
-                this.stock += 1
+                this.selectedVariant.stock += 1
             }
         }
 
@@ -32,13 +31,16 @@ var app = new Vue({
     computed: {
         inStock() {
             return this.stock > 0 ? true : false
-            // if (this.stock > 0) {
-            //     return true
-            // }
-            // else {
-            //     return false
-            // }
-        }
 
+        },
+        img() {
+            return this.selectedVariant.img
+        },
+        stock() {
+            return this.selectedVariant.stock
+        }
+    },
+    created() {
+        this.selectedVariant = this.variants.find(item => item.default == true)
     }
 })
