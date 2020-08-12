@@ -17,12 +17,12 @@
       <span class="navbar-brand mb-0 h1">Hola 0048</span>
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="#">{{cart}}</a>
+          <a class="nav-link" href="#">Carrito: {{cart.length}}</a>
         </li>
       </ul>
     </nav>
     <div class="container">
-      <product :premium="premium" @add-to-cart="addToCart" @remove-from-cart="removeFromCart"></product>
+      <product :premium="premium" :cart="cart" @add-to-cart="addToCart" @remove-from-cart="removeFromCart"></product>
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
@@ -52,7 +52,7 @@
           <button class="btn btn-sm btn-info" @click='addToCart()' :disabled="!inStock">Agregar al carro</button>
           <button class="btn btn-sm btn-warning" @click='removeFromCart()'>Sacar del carro</button>
         </div>
-      </div>`
+      </div>
   </script>
   <script src="main.js"></script>
 

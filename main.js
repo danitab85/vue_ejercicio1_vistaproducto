@@ -3,7 +3,12 @@ Vue.component("product", {
     premium: {
       type: Boolean,
       required: true
+    },
+    cart: {
+      type: Array,
+      required: true
     }
+
   },
   data() {
     return {
@@ -14,7 +19,7 @@ Vue.component("product", {
       details: ["500gr", "16gr de proteína", "Libre de sufrimiento"],
       variants: [
         { id: 1, type: 'original', img: './assets/index.png', stock: 10 },
-        { id: 2, type: 'hot italian', img: './assets/hotitalian.png', stock: 0, default: true }
+        { id: 2, type: 'hot italian', img: './assets/hotitalian.png', stock: 8, default: true }
       ],
 
     }
@@ -26,13 +31,16 @@ Vue.component("product", {
     },
     addToCart() {
       if (this.stock != 0) {
-        this.$emit("add-to-cart", 1);
+        this.$emit("add-to-cart", this.selectedVariant);
         this.selectedVariant.stock -= 1;
       }
     },
     removeFromCart() {
-      this.$emit("remove-from-cart", 1);
-      this.selectedVariant.stock += 1
+      var variantInCart = this.cart.find(product => product == this.selectedVariant)
+      this.$emit("remove-from-cart", this.selectedVariant);
+      if (variantInCart) {
+        this.selectedVariant.stock += 1
+      }
     }
   },
 
@@ -59,16 +67,17 @@ Vue.component("product", {
 var app = new Vue({
   el: '#app',
   data: {
-    cart: 0,
+    cart: [],
     premium: true
   },
   methods: {
-    addToCart(cant) {
-      this.cart += cant
+    addToCart(variant) {
+      this.cart.push(variant)
     },
-    removeFromCart(cant) {
-      if (this.cart > 0) {
-        this.cart -= cant
+    removeFromCart(variant) {
+      var index = this.cart.indexOf(variant)
+      if (index > -1) {
+        this.cart.splice(index, 1)
       }
 
     }
