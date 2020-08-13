@@ -1,8 +1,8 @@
-Vue.component('details', {
+Vue.component('details-component', {
     template: '#details-template',
     props: {
         detailsList: {
-            type: String,
+            type: Array,
             required: true
         }
     }

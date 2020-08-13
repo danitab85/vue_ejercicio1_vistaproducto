@@ -9,15 +9,15 @@ Vue.component('product-tabs', {
             required: true
         },
         detailsList: {
-            type: String,
+            type: Array,
             required: true
         }
     },
     template: '#tabs-template',
     data() {
         return {
-            tabs: ['agregar review', 'ver review', 'envio', 'detalles'],
-            selectedTab: 'agregar review'
+            tabs: ['Agregar review', 'Ver review', 'Envío', 'Detalles'],
+            selectedTab: 'Agregar review'
         }
     },
 })

@@ -1,4 +1,4 @@
-Vue.component('reviewsForm', {
+Vue.component('reviews-form', {
     template: '#reviews-form',
     data() {
         return {

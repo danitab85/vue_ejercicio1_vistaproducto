@@ -96,10 +96,10 @@
           </li>
           
         </ul>
-        <reviewsForm v-show="selectedTab=='agregar review'" ></reviewsForm>
-        <review-list :reviews="reviews" v-show="selectedTab=='ver review'"></review-list>
-        <review-send :send="send" v-show="selectedTab=='envio'"></review-send>
-        <details :detailsList="detailsList" v-show="selectedTab=='detalles'"></details>
+        <reviews-form v-show="selectedTab=='Agregar review'" ></reviews-form>
+        <review-list :reviews="reviews" v-show="selectedTab=='Ver review'"></review-list>
+        <review-send :send="send" v-show="selectedTab=='Envío'"></review-send>
+        <details-component :detailsList="detailsList" v-show="selectedTab=='Detalles'"></details-component>
       </div>
   
     </script>
@@ -157,8 +157,7 @@
           <div class="form-group col-md-12">
             <textarea v-model="review" class="form-group"></textarea>
           </div>
-        <!-- </div> -->
-  
+          
           <div class="form-group col-md-6">
             <label for="inputState">Notas</label>
             <select v-model.number="rating" class="form-control">
